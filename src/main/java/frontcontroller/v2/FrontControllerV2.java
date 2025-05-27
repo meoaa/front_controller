@@ -14,7 +14,7 @@ import java.util.HashMap;
 @WebServlet(name = "frontControllerV2", urlPatterns = "/v2/*")
 public class FrontControllerV2 extends HttpServlet {
 
-    HashMap<String, ControllerV2> handlerMap = new HashMap<>();
+    private final HashMap<String, ControllerV2> handlerMap = new HashMap<>();
 
     public FrontControllerV2() {
         handlerMap.put("/v2/list", new ListControllerV2());
@@ -30,6 +30,11 @@ public class FrontControllerV2 extends HttpServlet {
         System.out.println("FrontControllerV2.service");
 
         ControllerV2 controller = handlerMapping(request);
+        if(controller == null){
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
         String viewName = viewResolver(request, response, controller);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewName);
