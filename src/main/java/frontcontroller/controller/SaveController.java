@@ -1,5 +1,6 @@
 package frontcontroller.controller;
 
+import domain.Todo;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,8 +11,8 @@ import repository.MemoryTodoRepository;
 
 import java.io.IOException;
 
-@WebServlet(name = "addController", urlPatterns = "/add")
-public class AddController extends HttpServlet {
+@WebServlet(name = "viewController", urlPatterns = "/save")
+public class SaveController extends HttpServlet {
 
     private final MemoryTodoRepository repository = MemoryTodoRepository.getInstance();
 
@@ -21,9 +22,18 @@ public class AddController extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("add controller");
+        System.out.println("save Controller");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/controller/add.jsp");
+        String title = request.getParameter("title");
+        System.out.println("title = " + title);
+        Todo todo = new Todo(title);
+        repository.save(todo);
+
+        request.setAttribute("todo", todo);
+
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher("/controller/view.jsp");
+
         dispatcher.forward(request,response);
     }
 }
