@@ -1,7 +1,6 @@
 package frontcontroller.v3;
 
 import frontcontroller.ModelView;
-import frontcontroller.v2.ControllerV2;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
