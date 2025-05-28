@@ -1,12 +1,13 @@
 package frontcontroller;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ModelView {
     private String viewName;
-    private HashMap<String, Object> model;
+    private Map<String, Object> model;
 
-    public ModelView(HashMap<String, Object> model, String viewName) {
+    public ModelView(Map<String, Object> model, String viewName) {
         this.model = model;
         this.viewName = viewName;
     }
@@ -15,7 +16,7 @@ public class ModelView {
         return viewName;
     }
 
-    public HashMap<String, Object> getModel() {
+    public Map<String, Object> getModel() {
         return model;
     }
 }

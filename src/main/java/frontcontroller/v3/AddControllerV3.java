@@ -8,6 +8,7 @@ import java.util.Map;
 public class AddControllerV3 implements ControllerV3{
     @Override
     public ModelView process(Map<String, String> paramMap) {
+        System.out.println("AddControllerV3.process");
         HashMap<String, Object> model = new HashMap<>();
         return new ModelView(model , "add");
     }

@@ -13,6 +13,7 @@ public class SaveControllerV3 implements ControllerV3{
 
     @Override
     public ModelView process(Map<String, String> paramMap) {
+        System.out.println("SaveControllerV3.process");
         String title = paramMap.get("title");
         Todo todo = new Todo(title);
         repository.save(todo);

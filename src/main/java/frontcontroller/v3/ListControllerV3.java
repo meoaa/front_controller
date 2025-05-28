@@ -14,6 +14,7 @@ public class ListControllerV3 implements ControllerV3{
 
     @Override
     public ModelView process(Map<String, String> paramMap) {
+        System.out.println("ListControllerV3.process");
         List<Todo> todo = repository.findAll();
         HashMap<String, Object> model = new HashMap<>();
         model.put("todo", todo);

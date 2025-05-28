@@ -1,5 +1,6 @@
 package frontcontroller.v4;
 
+import frontcontroller.MyView;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,11 +39,12 @@ public class FrontControllerV4 extends HttpServlet {
 
         HashMap<String, Object> model = new HashMap<>();
         Map<String, String> paramMap = createParamMap(request);
+
         String viewName = controller.process(paramMap, model);
         String viewPath = viewResolver(viewName);
 
-        render(request, response, model, viewPath);
-
+        MyView myView = new MyView(viewPath);
+        myView.render(request,response,model);
     }
 
     private static String viewResolver(String viewName) {
@@ -50,13 +52,6 @@ public class FrontControllerV4 extends HttpServlet {
         String suffix = ".jsp";
         return prefix + viewName + suffix;
     }
-
-    private static void render(HttpServletRequest request, HttpServletResponse response, HashMap<String, Object> model, String viewPath) throws ServletException, IOException {
-        model.forEach(request::setAttribute);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
-        dispatcher.forward(request, response);
-    }
-
 
     private Map<String,String> createParamMap(HttpServletRequest request) {
         Map<String, String> paramMap = new HashMap<>();
